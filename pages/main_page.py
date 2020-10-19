@@ -1,6 +1,5 @@
 from .base_page import BasePage
-from .locators import MainPageLocators
-import os
+from locators import MainPageLocators
 import time
 
 
@@ -30,11 +29,9 @@ class MainPage(BasePage):
         change_button_link.click()
 
     def choose_file(self, file):
-        current_dir = os.path.abspath(os.path.dirname(__file__))
-        file_path = os.path.join(current_dir, file)
         hide_button_link = self.browser.find_element(*MainPageLocators.HIDE_BUTTON_LINK)
         assert self.is_element_present(*MainPageLocators.HIDE_BUTTON_LINK), "Input avatar button is not presented"
-        hide_button_link.send_keys(file_path)
+        hide_button_link.send_keys(file)
         time.sleep(5)
 
     def click_button_apply(self):

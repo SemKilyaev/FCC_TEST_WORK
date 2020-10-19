@@ -2,14 +2,13 @@ from pages.main_page import MainPage
 import pytest
 import allure
 from allure_commons.types import AttachmentType
-
+from source.file_path_to_jpg import file_path
 
 email = 'darkvanted@gmail.com'
 password = 'cehr032197'
 password_change = '032197cehr'
 link = "https://www.freeconferencecall.com/ru"
-file = '1234.jpg'
-
+file = file_path()
 
 
 @allure.testcase(link, 'FCC')
