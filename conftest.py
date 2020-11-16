@@ -4,14 +4,13 @@ from webdriver_manager.firefox import GeckoDriverManager
 
 
 def pytest_addoption(parser):
-    parser.addoption('--browser_name', action='store', default=None,
+    parser.addoption('--browser_name', action='store', default='chrome',
                      help="Choose browser: chrome or firefox")
 
 
 @pytest.fixture(scope="function")
 def browser(request):
     browser_name = request.config.getoption("browser_name")
-    browser = None
     if browser_name == "firefox":
         print("\nstart firefox browser for test..")
         browser = webdriver.Firefox(executable_path=GeckoDriverManager().install())

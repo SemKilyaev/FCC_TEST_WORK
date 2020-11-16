@@ -1,6 +1,8 @@
 from .base_page import BasePage
 from locators import MainPageLocators
 import time
+import pickle
+from source.file_path_to_jpg import MyPath
 
 
 class MainPage(BasePage):
@@ -72,3 +74,21 @@ class MainPage(BasePage):
 
     def should_be_login_link(self):
         assert self.is_element_present(*MainPageLocators.LOGIN_LINK), "Login link is not presented"
+
+    def make_cookie(self):
+        print(self.browser.get_cookies())
+        pickle.dump(self.browser.get_cookies(), open("D:\\FCC_TEST_WORK\\source\\cookies.pkl", "wb"))
+
+    def in_for_cookie(self, file):
+        # self.browser.get("https://www.freeconferencecall.com/ru/ru/login")
+        # cookies = pickle.load(open(file, "rb"))
+        # for cookie in cookies:
+        #     self.browser.add_cookie(cookie)
+        # time.sleep(10)
+        cookies = pickle.load(open(file, "rb"))
+        self.browser.get("https://www.freeconferencecall.com/ru/ru/login")
+        for cookie in cookies:
+            self.browser.add_cookie(cookie)
+        time.sleep(5)
+        self.browser.refresh()
+        time.sleep(5)

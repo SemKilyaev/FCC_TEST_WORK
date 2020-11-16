@@ -2,13 +2,15 @@ from pages.main_page import MainPage
 import pytest
 import allure
 from allure_commons.types import AttachmentType
-from source.file_path_to_jpg import file_path
+from source.file_path_to_jpg import MyPath
 
 email = 'darkvanted@gmail.com'
 password = 'cehr032197'
 password_change = '032197cehr'
 link = "https://www.freeconferencecall.com/ru"
-file = file_path()
+my_path_file = MyPath
+file = my_path_file.file_path()
+cookie = my_path_file.cookie_path()
 
 
 @allure.testcase(link, 'FCC')
@@ -23,16 +25,18 @@ def test_authorization(browser, email, password, link):
         page.should_be_login_link()
         page.go_to_login_page()
         allure.attach(browser.get_screenshot_as_png(), name="ScreenshotAut2", attachment_type=AttachmentType.PNG)
+        # page.in_for_cookie(cookie)
         page.enter_email(email)
         page.enter_password(password)
         allure.attach(browser.get_screenshot_as_png(), name="ScreenshotAut3", attachment_type=AttachmentType.PNG)
         page.click_button_authorization()
+        page.make_cookie()
         allure.attach(browser.get_screenshot_as_png(), name="ScreenshotAut4", attachment_type=AttachmentType.PNG)
 
 @allure.testcase(link, 'FCC_avatar')
 @pytest.mark.avatar
-@pytest.mark.parametrize('email, password, link, file', [(email, password, link, file)])
-def test_change_avatar(browser, email, password, link, file):
+@pytest.mark.parametrize('email, password, link, file, cookie', [(email, password, link, file, cookie)])
+def test_change_avatar(browser, email, password, link, file, cookie):
     with allure.step("Launch site"):
         page = MainPage(browser, link)
         page.open()
