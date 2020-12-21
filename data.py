@@ -2,9 +2,9 @@ import os
 
 
 class Data:
-    EMAIL = 'darkvanted@gmail.com'
-    PASSWORD = 'cehr032197'
-    NEW_PASSWORD = '032197cehr'
+    EMAIL = ''
+    PASSWORD = ''
+    NEW_PASSWORD = ''
     FILE = os.getcwd() + "/source/1234.jpg"
     TIMEZONE = '108'
     NEW_TIMEZONE = '136'
